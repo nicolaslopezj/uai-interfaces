@@ -24,7 +24,7 @@ boolean isBotonOn() {
 
 boolean isFlexionOn() {
   int flexionVal = analogRead(pinFlexion);
-  return flexionVal < 410;
+  return flexionVal < 390;
 }
 
 boolean isIrOn() {
@@ -38,6 +38,7 @@ void communicate() {
   Serial.print(isFlexionOn());
   Serial.print(",");
   Serial.print(isIrOn());
+  Serial.print(",");
   Serial.println("");
 }
 
