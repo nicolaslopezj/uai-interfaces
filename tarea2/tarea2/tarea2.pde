@@ -9,12 +9,12 @@ BooleanIndicatorCircle sensorIndicatorCircle;
 BooleanIndicatorCircle irIndicatorCircle;
 ClosingCircle closingCircle;
 int currentChallenge;
-int vidas = 3;
-int rondas = 10;
+int vidas = 10;
+int rondas = 20;
 int puntaje = 0;
-int timeToAct = 1000;
-int noActTime = 200;
-int instrucciones = 100;
+int timeToAct = 1500;
+int noActTime = 300;
+int instrucciones = 400;
 boolean waitingOut = false;
 
 void setup() {
