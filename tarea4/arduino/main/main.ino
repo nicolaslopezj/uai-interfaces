@@ -1,32 +1,30 @@
-
-/*
- * Main Functions
- */
-
-void setup() {
-	setupRelay();
-	setupCommunication();
-}
-
-void loop() {
-	communicate();
-	delay(500);
-}
-
 /*
  * Communication
  */
+
+boolean motorState;
+String message;
 
 void setupCommunication() {
 	Serial.begin(9600);
 }
 
 void communicate() {
-	Serial.print("Distancia: ");
-	Serial.println(isNear());
+	Serial.print(getUltrasonicDistance());
+	Serial.print(",");
+	Serial.print(getHumidity());
+	Serial.print(",");
+	Serial.print(motorState);
+	Serial.print(",");
+	Serial.print(message);
+	Serial.println(",");
+}
 
-	Serial.print("Humedad: ");
-	Serial.println(getHumidity());
+void readSerial() {
+	if (Serial.available() > 0) {
+		message = Serial.readStringUntil('\n');
+		motorState = message.equals("on");
+	}
 }
 
 /*
@@ -63,10 +61,6 @@ int getUltrasonicDistance() {
 	return ultrasonic.Ranging(CM);
 }
 
-boolean isNear() {
-	return getUltrasonicDistance() < 10;
-}
-
 
 /*
  * Relay
@@ -78,19 +72,32 @@ void setupRelay() {
 	pinMode(relayPin, OUTPUT);
 }
 
-void relayOn() {
-	digitalWrite(relayPin, HIGH);
+void relaySet(boolean on) {
+
+	if (on) {
+		digitalWrite(relayPin, HIGH);
+	} else {
+		digitalWrite(relayPin, LOW);
+	}
+	
 }
 
-void relayOff() {
-	digitalWrite(relayPin, LOW);
+/*
+ * Main Functions
+ */
+
+void setup() {
+	setupRelay();
+	setupCommunication();
 }
 
+void loop() {
+	relaySet(motorState);
+	readSerial();
+	communicate();
 
-
-
-
-
+	delay(200);
+}
 
 
 
