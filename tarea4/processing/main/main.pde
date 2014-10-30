@@ -16,7 +16,7 @@ void setup() {
   puerto.bufferUntil('\n');
   
   controlP5 = new ControlP5(this);
-  controlP5.addSlider("SET DISTANCE", 2, 51, 50, 100, 40, 400);
+  controlP5.addSlider("SET TIME", 2, 21, 50, 100, 40, 400);
 }
 
 void serialEvent(Serial puerto)
@@ -27,7 +27,9 @@ void serialEvent(Serial puerto)
       String[] datos = mensaje.split(",");
       distanceVal = int(datos[0]);
       humidityVal = int(datos[1]);
-      println(datos[3]);
+      print("Humedad: ");
+      println(humidityVal);
+      //println(datos[3]);
     } catch (Exception e) {
       
     }
@@ -44,15 +46,16 @@ void controlEvent(ControlEvent theEvent) {
 void draw() {
   background(0);
   
-  println(distanceControl);
-  println(distanceVal);
+  //println(distanceControl);
+  //println(distanceVal);
   
   drawBaseRectangles();
   drawStatusRectangles();
   drawOnCircle();
   
-  if (distanceControl > distanceVal) {
+  if (16 > distanceVal) {
       puerto.write("on\n");
+      delay(int(distanceControl));
   } else {
       puerto.write("off\n");
   }
@@ -65,7 +68,7 @@ void drawBaseRectangles() {
 }
 
 void drawStatusRectangles() {
-  float mappedDistance = map(distanceVal, 2, 51, 400, 0);
+  float mappedDistance = map(distanceVal, 2, 21, 400, 0);
   float mappedHumidity = map(humidityVal, 30, 50, 400, 0);
   
   fill(0, 255, 255);
