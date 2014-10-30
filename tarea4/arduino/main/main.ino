@@ -23,7 +23,7 @@ void communicate() {
 void readSerial() {
 	if (Serial.available() > 0) {
 		message = Serial.readStringUntil('\n');
-		motorState = message.equals("on");
+		motorState = message.equals("1");
 	}
 }
 
