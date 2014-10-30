@@ -54,10 +54,10 @@ void draw() {
   drawOnCircle();
   
   if (16 > distanceVal) {
-      puerto.write("on\n");
+      puerto.write("1\n");
       delay(int(distanceControl));
   } else {
-      puerto.write("off\n");
+      puerto.write("0\n");
   }
 }
 
