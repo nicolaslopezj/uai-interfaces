@@ -69,15 +69,15 @@ void setupMotor() {
 }
 
 void controlMotor() {
-	int speed1 = 0;
-	int speed2 = 0;
+	int speed1 = 70;
+	int speed2 = 70;
 
 	if (encoderValue > 0) {
-		speed1 = encoderValue * 10;
-		speed2 = encoderValue * 7;
-	} else if (encoderValue < 0) {
-		speed1 = encoderValue * -7;
-		speed2 = encoderValue * -10;
+		speed1 += encoderValue * 3;
+		speed2 += 0;
+	} else {
+		speed1 += 0;
+		speed2 += encoderValue * -3;
 	}
 
 	moveMotor(speed1, speed2);
