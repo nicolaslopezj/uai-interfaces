@@ -1,7 +1,8 @@
 import processing.serial.*;
 
 Serial puerto;
-
+int points = 0;
+boolean lastColor;
 boolean isBlack;
 
 void setup() {
@@ -36,7 +37,18 @@ void serialEvent(Serial puerto)
 }
 
 void draw() {
+  textAlign(CENTER, CENTER);
+  
+  if (!lastColor && isBlack) {
+    points++;
+  }
+  
+  lastColor = isBlack;
   int background = isBlack ? 0 : 255;
   background(background);
+  
+  textSize(50);
+  fill(122);
+  text(points, 250, 100);
   
 }

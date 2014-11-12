@@ -81,9 +81,6 @@ void controlMotor() {
 	}
 
 	moveMotor(speed1, speed2);
-	Serial.print(speed1);
-	Serial.print(" : ");
-	Serial.println(speed2);
 }
 
 void moveMotor(int speed1, int speed2) {
@@ -100,7 +97,7 @@ void moveMotor(int speed1, int speed2) {
  * QD Sensor
  */
 
-#define QRE1113_Pin 5
+#define QRE1113_Pin 12
 int qdValue = 0;
 
 void readQD() {
